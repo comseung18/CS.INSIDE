@@ -35,8 +35,7 @@ public class UserServiceImpl implements UserService{
         {
             userMapper.insertUser(newUser);
         }
-        // id 가 중복되어 신규유저 생성을 실패한 경우
-        catch (DuplicateKeyException exception)
+        catch (Exception exception)
         {
             exception.printStackTrace();
             return false;

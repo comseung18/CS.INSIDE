@@ -1,8 +1,8 @@
 package domain;
 
 public class GalleryCategory {
-    int num;
-    String name;
+    private int num;
+    private String name;
 
     public int getNum() {
         return num;

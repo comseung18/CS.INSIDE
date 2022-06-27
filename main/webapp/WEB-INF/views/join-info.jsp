@@ -65,8 +65,11 @@
             });
         }
 
-        function validForm()
+        function submitForm(e)
         {
+            e.preventDefault();
+            return false;
+
             // 아이디 검사
             if(!validId)
             {
@@ -90,7 +93,26 @@
                 return false;
             }
 
-            return true;
+
+            const url = '/join/info';
+            const post_data = {
+                id : $('#joinInfoId').get(0).value,
+                passwd : pw,
+                nickname : $('#joinInfoNick').get(0).value,
+                email : $('#joinInfoEmail').get(0).value,
+                fixedName : $('#joinInfoFixed').get(0).value == 'fixed'
+            };
+            $.ajax({
+                url: url,
+                type: "POST",
+                data : post_data,
+                contentType:"application/json; charset=utf-8",
+                dataType:"json",
+                success: function(d){
+                    $.html(d);
+                }
+            });
+            return false;
         }
 
         function nextBtnClicked()
@@ -104,12 +126,12 @@
         </div>
     </div>
     <div class="row">
-        <h3>기본 정보 입력</h3>
+        <h3>?? 왜 안바뀜</h3>
         <hr>
     </div>
     <div class="row infoBox">
         <div class="container joinFormBox">
-            <form action="/join/info" method="post" id="joinForm" onsubmit="return validForm();">
+            <form action="/join/info" method="POST" id="joinForm" onsubmit="return submitForm(e);">
                 <fieldset>
                     <div class="row mb-4">
                         <div class="col-3 joinFormLeft">

@@ -6,10 +6,7 @@ import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,31 +39,20 @@ public class JoinController {
     }
 
     @PostMapping("/info")
-    public String joinInfoPost(HttpServletRequest request)
+    public String joinInfoPost(@RequestBody User newUser)
     {
-        String id = request.getParameter("joinInfoId");
-        String pw = request.getParameter("joinInfoPw");
-        String pwRe = request.getParameter("joinInfoPwRe");
-        String nickname = request.getParameter("joinInfoNick");
-        boolean fixed = request.getParameter("joinInfoFixed").equals("fixed");
-        String email = request.getParameter("joinInfoEmail");
+        System.out.println("here");
+        // 신규 유저의 아이디나 비밀번호 등의 제약 조건 검사
+        if(!newUser.IsValidNewUser()) return "redirect:/error/404";
 
-        // 우회했을 수 있으므로 2차 검증 필요함.
-        // TODO 기타 길이나 형식 등 검증 필요함.
-        if(userService.getUserById(id) != null) return "redirect:/error/404";
-        else if(fixed && userService.getUserByNickname(nickname) != null) return "redirect:/error/404";
-        else if(!pw.equals(pwRe)) return "redirect:/error/404";
+        // id 가 중복되는 경우
+        if(userService.getUserById(newUser.getId()) != null) return "redirect:/error/404";
 
+        // 고정닉인데 닉네임이 중복되는 경우
+        if(newUser.getFixedName() && userService.getUserByNickname(newUser.getNickname()) != null) return "redirect:/error/404";
 
-        // 신규 유저 객체를 만듦.
-        User user = new User();
-        user.setId(id);
-        user.setPasswd(pw);
-        user.setNickname(nickname);
-        user.setFixedName(fixed);
-        user.setEmail(email);
-
-        if(!userService.registNewUser(user)) return "redirect:/error/404";
+        // 생성에 실패하면 false 가 반환됨
+        if(!userService.registNewUser(newUser)) return "redirect:/error/404";
 
         return "redirect:/join/complete";
     }

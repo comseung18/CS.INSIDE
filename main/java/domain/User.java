@@ -7,6 +7,7 @@ public class User {
     private String nickname;
     private String email;
     private Boolean fixedName;
+    private int level;
 
     public int getLevel() {
         return level;
@@ -15,8 +16,6 @@ public class User {
     public void setLevel(int level) {
         this.level = level;
     }
-
-    private int level;
 
     public int getNum() {
         return num;
@@ -64,5 +63,11 @@ public class User {
 
     public void setFixedName(Boolean fixedName) {
         this.fixedName = fixedName;
+    }
+
+    public boolean IsValidNewUser()
+    {
+        // 아이디나 비밀번호, 닉네임의 조건에 따라서 추가될 수 있음.
+        return true;
     }
 }
