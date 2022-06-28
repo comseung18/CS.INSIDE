@@ -41,7 +41,6 @@ public class JoinController {
     @PostMapping("/info")
     public String joinInfoPost(@RequestBody User newUser)
     {
-        System.out.println("here");
         // 신규 유저의 아이디나 비밀번호 등의 제약 조건 검사
         if(!newUser.IsValidNewUser()) return "redirect:/error/404";
 

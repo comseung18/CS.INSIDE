@@ -13,6 +13,7 @@ public interface UserMapper{
     List<User> getAllUsers();
     User getUserByFixedNickname(String nickname);
     User getUserById(String id);
+    User getUserByIdPw(User user);
 
     int insertUser(User newUser) throws DuplicateKeyException;
 }

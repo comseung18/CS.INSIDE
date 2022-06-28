@@ -28,6 +28,10 @@
         SELECT  * FROM user WHERE ID = #{id}
     </select>
 
+    <select id="getUserByIdPw" resultMap="userMap" parameterType="domain.User">
+        SELECT * FROM user WHERE ID = #{id} AND passwd = sha2(#{passwd}, 256)
+    </select>
+
     <insert id="insertUser" parameterType="domain.User">
         INSERT INTO user(ID, passwd , nickname, email, fixed_name) VALUES (#{id}, sha2(#{passwd}, 256) , #{nickname}, #{email}, #{fixedName})
     </insert>

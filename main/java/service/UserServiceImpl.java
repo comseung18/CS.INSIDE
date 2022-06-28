@@ -30,6 +30,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUserByIdPw(String id, String pw) {
+        User user = new User();
+        user.setId(id);
+        user.setPasswd(pw);
+        return userMapper.getUserByIdPw(user);
+    }
+
+    @Override
     public boolean registNewUser(User newUser){
         try
         {
