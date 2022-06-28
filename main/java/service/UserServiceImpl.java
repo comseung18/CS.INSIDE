@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService{
         User user = new User();
         user.setId(id);
         user.setPasswd(pw);
+        System.out.println(id + ", " + pw);
         return userMapper.getUserByIdPw(user);
     }
 

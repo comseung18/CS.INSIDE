@@ -31,9 +31,11 @@ public class LoginController {
         String pw = request.getParameter("userPasswd");
 
         User user = userService.getUserByIdPw(id, pw);
+        System.out.println(user == null);
         if(user != null)
         {
             session.setAttribute("user", user);
+            System.out.println("login suc user id : " + user.getId());
         }
         return "redirect:/";
     }

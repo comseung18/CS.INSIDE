@@ -1,13 +1,13 @@
 package domain;
 
 public class User {
-    private int num;
+    private int num = -1;
     private String id;
     private String passwd;
     private String nickname;
     private String email;
     private Boolean fixedName;
-    private int level;
+    private int level = -1;
 
     public int getLevel() {
         return level;

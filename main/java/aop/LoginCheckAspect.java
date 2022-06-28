@@ -23,7 +23,6 @@ public class LoginCheckAspect {
     @Before("@annotation(aop.LoginRequired)")
     public void loginRequired(JoinPoint jp) throws Throwable
     {
-        System.out.println("here???");
         HttpSession session = ((ServletRequestAttributes)(RequestContextHolder.
                 currentRequestAttributes())).
                 getRequest().
@@ -39,7 +38,6 @@ public class LoginCheckAspect {
     @Before("@annotation(aop.NoLoginRequired)")
     public void noLoginRequired(JoinPoint jp) throws Throwable
     {
-        System.out.println("here?");
         HttpSession session = ((ServletRequestAttributes)(RequestContextHolder.
                 currentRequestAttributes())).
                 getRequest().

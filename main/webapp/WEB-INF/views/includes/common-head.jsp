@@ -5,8 +5,10 @@
   Time: 오후 11:42
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
+
     <title>CS INSIDE</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="/resources/js/jquery-3.6.0.js"></script>
